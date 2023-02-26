@@ -8,22 +8,27 @@
  * @list: list to sort
  */
 
-void insertion_sort_list(listint_t **list)
+void insertion_sort_list(listint_t **listi)
 {
 	listint_t *head = NULL;
-	listint_t current;
-	listint_t p;
+	listint_t *current;
+	listint_t *p;
+	listint_t *list;
 
-	if (list == NULL || list->next == NULL)
+	list = *listi;
+
+	if (list == NULL || (list)->next == NULL)
 		return;
 
 	while (list != NULL)
 	{
 		current = list;
+		list = list->next;
 		if (head == NULL || current->n < head->n)
 		{
 			current->next=head;
 			head = current;
+			print_list(head);
 		}
 		else
 		{
@@ -32,13 +37,16 @@ void insertion_sort_list(listint_t **list)
 			{
 				if (p->next == NULL || current->n < p->next->n)
 				{
-					current->next =p->next;
+					current->next = p->next;
 					p->next = current;
-					print_list(list);
+					print_list(head);
 					break;
 				}
 				p = p->next;
 		}
 		}
-	}
+		
+	};
+	listi= &head; 
+
 }
